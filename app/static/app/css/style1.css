@@ -1,0 +1,134 @@
+/* Reset một số kiểu cơ bản */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Kiểu cơ bản cho toàn bộ trang */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+h1,
+h2 {
+    color: #444;
+}
+
+
+/* Kiểu cho các nhãn và trường nhập liệu */
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Kiểu cho danh sách bài đăng */
+
+.post-list {
+    margin-top: 20px;
+}
+
+.post-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.edit-button {
+    background-color: #ffc107;
+    margin-right: 10px;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.edit-button:hover {
+    background-color: #e0a800;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+
+/* Kiểu cho hộp thoại xác nhận */
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.modal-content select {
+    margin-bottom: 16px;
+}
+
+#confirm-delete {
+    background-color: #dc3545;
+}
+
+#confirm-delete:hover {
+    background-color: #c82333;
+}
+
+#cancel-delete {
+    background-color: #007bff;
+}
+
+#cancel-delete:hover {
+    background-color: #0056b3;
+}
