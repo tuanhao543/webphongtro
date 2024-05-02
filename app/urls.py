@@ -12,7 +12,7 @@ urlpatterns = [
     # trang chu da dang nhap  
     path('trangchudadangnhap/<ma_kh>/', views.trangchudadangnhap, name='trangchudadangnhap'),
     # tim kiem
-    # path('trangchudadangnhap/<str:ma_kh>/timkiem/', views.timkiem, name='timkiem'),
+    path('trangchudadangnhap/<str:ma_kh>/timkiem/', views.timkiem, name='timkiem'),
     # danh muc quan
     path('danhmucquan/<str:madanhmucquan>/<str:ma_kh>/', views.danhmucquan, name="danhmucquan"),
     # danh muc gia
@@ -32,8 +32,8 @@ urlpatterns = [
     # huy lich xem phong
     path('khachhang/<str:ma_kh>/lichxemphong/huylich/<str:malichxem>/', views.huylichxemphong, name='huylichxemphong'),
     # tro ly ao
-    path('ai_assistant/', AiAssistantView.as_view(), name='ai_assistant'),
-    path('chat/', views.chat_view, name='chat'),
-    path('timkiem/', views.timkiem, name='timkiem'),
+    # path('ai_assistant/', AiAssistantView.as_view(), name='ai_assistant'),
+    # path('chat/', views.chat_view, name='chat'),
+    # path('timkiem/', views.timkiem, name='timkiem'),
     
 ]
