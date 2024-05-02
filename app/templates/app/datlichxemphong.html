@@ -1,0 +1,99 @@
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        h1{
+            color:rgb(182, 182, 237);
+            font-size: 3rem;
+            text-align: center;
+        }
+        label{
+            color: rgb(182, 182, 237);
+            font-size: 2rem;
+            text-align: center;
+        }
+        button{
+            color: rgb(182, 182, 237);
+        text-align: right;
+        }
+        body{
+
+            border: 2px solid rgb(83, 83, 222);
+        }
+        ::placeholder{
+            color: rgb(182, 182, 237);
+        }
+    </style>
+</head>
+<body>
+    <h1>Đặt lịch xem phòng</h1>
+    <div>
+        <label>Mã lịch xem      &nbsp;&nbsp;&ensp; : </label>
+        <input type="text" placeholder=""/>
+    </div>
+    <br>
+    <div>
+        <label>Mã phòng        &ensp;&ensp;&emsp;    : </label>
+ <input type="text" placeholder=""/>
+    </div>
+    <br>
+    <div>
+        <label>Tên khách hàng   :</label>
+        <input type="text" placeholder=""/>
+    </div>
+    <br>
+    <div>
+        <label>Gía &emsp;&emsp;&emsp;&emsp;&ensp;&nbsp;:             </label>
+        <input type="text" placeholder=""/>
+    </div>
+    <br>
+    <div>
+        <label>Thời gian xem &nbsp; :</label>
+        <input type="text" placeholder=""/>
+    </div>
+    <br>
+    <div>
+        <label>Địa chỉ phòng  &ensp;  :</label>
+        <input type="text" placeholder=""/>
+    </div>
+    <br>
+    <div>
+        <label>Email   &emsp;&emsp;&emsp;&emsp; :</label>
+        <input type="text" placeholder=""/>
+    </div>
+    <br>
+    <div>
+        <label>Số điện thoại&emsp;&ensp;:</label>
+        <input type="text" placeholder=""/>
+    </div>
+    <div>
+        <button>Trở về</button>
+        <button>Lưu thông tin</button>
+    </div>
+</body>
+</html>
+
+ {% endcomment %}
+
+ <h1>Đặt lịch xem phòng</h1>
+ <p>Mã lịch xem: {{ malichxem }}</p>
+ <p>Mã phòng: {{ phong.maphong }}</p>
+ <label for="tenkh">Tên khách hàng:</label>
+ <input type="text" id="tenkh" name="ten_kh_xem" value="{{ khachhang.ten_kh }}" required>
+ <p>Giá: {{ phong.gia }}</p>
+ <p>Địa chỉ phòng: {{ phong.diachi }}</p>
+ <label for="email_kh">email_kh:</label>
+ <input type="text" id="email_kh" name="email_kh" value="{{ khachhang.email_kh }}" required>
+ <label for="sdt_kh">sdt_kh:</label>
+ <input type="text" id="sdt_kh" name="sdt_kh" value="{{ khachhang.sdt_kh }}" required>
+ <form method="POST" action="{% url 'luulichxemphong' ma_kh=khachhang.ma_kh ma_phong=phong.maphong %}">
+   {% csrf_token %}
+   <label for="tgxem">Thời gian xem:</label>
+   <input type="datetime-local" id="thoigianxem" name="thoigianxem" required>
+   <button type="submit">Lưu</button>
+ </form> 

@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Thông Tin</title>
+    <link href="{% static 'app/css/style2.css' %}" rel="stylesheet"/>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Mã khách hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Căn cước công dân</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ khachhang.ma_kh }}</td>
+                <td>{{ khachhang.ten_kh }}</td>
+                <td>{{ khachhang.sdt_kh }}</td>
+                <td>{{ khachhang.email_kh }}</td>
+                <td>{{ khachhang.diachi_kh }}</td>
+                <td>{{ khachhang.cccd }}</td>
+                <td>
+                    <button class="edit-btn"></button>
+                    <button class="delete-btn"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+{% load static %}
+{% for phong in phongs %}
+  <div class = "col-lg-3">
+    <img class = "thumbnail" src="{{phong.hinhanhURL}}" >
+    <div clas="box-element product">
+      <h6><strong>{{phong.tieude}}</strong></h6>
+      <hr>
+      <button data-product={{ phong.maphong }} data-action ="add" class ="btn btn-outline-secondary add-btn update-cart">Thêm vào giỏ hàng</button>
+      <a class ="btn btn-outline-success" href="{% url 'chitietphong' ma_kh=khachhang.ma_kh ma_phong=phong.maphong %}">xem</a>
+      <h4 style= "display: inline-block; float: right"><strong>${{phong.gia | floatformat:2}}</strong></h4>
+    </div>
+  </div>
+ {% endfor %}
+ <a class="btn btn-outline-success" href="{% url 'xemlichxemphong' ma_kh=khachhang.ma_kh %}">Xem lịch xem phòng</a>
