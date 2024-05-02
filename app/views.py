@@ -92,17 +92,17 @@ def trangchudadangnhap(request, ma_kh):
 
 
 # # tim kiém
-# def timkiem(request, ma_kh):
-#     if request.method == 'POST':
-#         search_title = request.POST.get('search_title', '')
-#         # Thực hiện tìm kiếm sản phẩm với tiêu đề trùng
-#         phong_list = Phong.objects.filter(tieude=search_title)
-#         context = {
-#             'phong_list': phong_list
-#         }
-#         return render(request, 'app/ketquatimkiem.html', context)
+def timkiem(request, ma_kh):
+    if request.method == 'POST':
+        search_title = request.POST.get('search_title', '')
+        # Thực hiện tìm kiếm sản phẩm với tiêu đề trùng
+        phong_list = Phong.objects.filter(tieude=search_title)
+        context = {
+            'phong_list': phong_list
+        }
+        return render(request, 'app/ketquatimkiem.html', context)
     
-#     return redirect('trangchudadangnhap', ma_kh=ma_kh)
+    return redirect('trangchudadangnhap', ma_kh=ma_kh)
 
 
 # danh mục quan
@@ -224,55 +224,55 @@ def huylichxemphong(request, ma_kh, malichxem):
     return redirect('xemlichxemphong', ma_kh=ma_kh)
 
 
-from .models import Phong
-from django.http import HttpResponseRedirect
+# from .models import Phong
+# from django.http import HttpResponseRedirect
 
-import json
+# import json
 
-class AiAssistantView(View):
-    def get(self, request):
-        return render(request, 'app/chattrolyao.html')
+# class AiAssistantView(View):
+#     def get(self, request):
+#         return render(request, 'app/chattrolyao.html')
 
-    def post(self, request):
-        NguoiDung = request.POST.get('q', '')
-        response = self.process_input(NguoiDung)
-        if isinstance(response, str):
-            return JsonResponse({'response': response})
-        else:
-            return JsonResponse({'response': response['response'], 'redirect_url': response['redirect_url']})
+#     def post(self, request):
+#         NguoiDung = request.POST.get('q', '')
+#         response = self.process_input(NguoiDung)
+#         if isinstance(response, str):
+#             return JsonResponse({'response': response})
+#         else:
+#             return JsonResponse({'response': response['response'], 'redirect_url': response['redirect_url']})
 
-    def process_input(self, NguoiDung):
-        if 'chào' in NguoiDung:
-            response = 'Chào bạn, tôi là trợ lý ảo của web, tôi có thể giúp gì cho bạn?'
-            return response
-        elif 'hôm nay' in NguoiDung:
-            today = date.today()
-            response = today.strftime("Hôm nay là %d/%m/%Y")
-            return response
-        elif 'mấy giờ' in NguoiDung:
-            thoigian = datetime.now()
-            response = thoigian.strftime("%H:%M:%S")
-            return response
-        elif 'tìm kiếm' in NguoiDung:
-            search_keyword = NguoiDung.split('tìm kiếm', 1)[1].strip()
-            redirect_url = f'/timkiem/?search_title={search_keyword}'
-            return {'response': f'Tôi sẽ tìm kiếm "{search_keyword}"', 'redirect_url': redirect_url}
-        else:
-            response = "Tôi chưa được lập trình cho câu hỏi này"
-            return response
+#     def process_input(self, NguoiDung):
+#         if 'chào' in NguoiDung:
+#             response = 'Chào bạn, tôi là trợ lý ảo của web, tôi có thể giúp gì cho bạn?'
+#             return response
+#         elif 'hôm nay' in NguoiDung:
+#             today = date.today()
+#             response = today.strftime("Hôm nay là %d/%m/%Y")
+#             return response
+#         elif 'mấy giờ' in NguoiDung:
+#             thoigian = datetime.now()
+#             response = thoigian.strftime("%H:%M:%S")
+#             return response
+#         elif 'tìm kiếm' in NguoiDung:
+#             search_keyword = NguoiDung.split('tìm kiếm', 1)[1].strip()
+#             redirect_url = f'/timkiem/?search_title={search_keyword}'
+#             return {'response': f'Tôi sẽ tìm kiếm "{search_keyword}"', 'redirect_url': redirect_url}
+#         else:
+#             response = "Tôi chưa được lập trình cho câu hỏi này"
+#             return response
 
-def timkiem(request):
-    if request.method == 'GET':
-        search_title = request.GET.get('search_title', '')
-        phong_list = Phong.objects.filter(tieude=search_title)
-        context = {
-            'phong_list': phong_list
-        }
-        return render(request, 'app/ketquatimkiem.html', context)
-    return redirect('trangchudadangnhap')
+# def timkiem(request):
+#     if request.method == 'GET':
+#         search_title = request.GET.get('search_title', '')
+#         phong_list = Phong.objects.filter(tieude=search_title)
+#         context = {
+#             'phong_list': phong_list
+#         }
+#         return render(request, 'app/ketquatimkiem.html', context)
+#     return redirect('trangchudadangnhap')
 
-def chat_view(request):
-    return render(request, 'app/chattrolyao.html')
+# def chat_view(request):
+#     return render(request, 'app/chattrolyao.html')
 
 
-# ma_kh = request.GET.get('ma_kh')
+# # ma_kh = request.GET.get('ma_kh')
