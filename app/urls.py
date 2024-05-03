@@ -32,8 +32,11 @@ urlpatterns = [
     # huy lich xem phong
     path('khachhang/<str:ma_kh>/lichxemphong/huylich/<str:malichxem>/', views.huylichxemphong, name='huylichxemphong'),
     # tro ly ao
-    # path('ai_assistant/', AiAssistantView.as_view(), name='ai_assistant'),
-    # path('chat/', views.chat_view, name='chat'),
-    # path('timkiem/', views.timkiem, name='timkiem'),
+    path('ai_assistant/', AiAssistantView.as_view(), name='ai_assistant'),
+    path('chat/<str:ma_kh>/', chat_view, name='chat'),
+    # tro lý ao tim kiem
+    path('trolyaotimkiem/<str:ma_kh>/', views.trolyaotimkiem, name='trolyaotimkiem'),
+    path('trolyaotimkiemquan/<str:ma_kh>/', views.trolyaotimkiemquan, name='trolyaotimkiemquan'),
+    path('trolyaotimkiemgia/<str:ma_kh>/', views.trolyaotimkiemgia, name='trolyaotimkiemgia'),
     
 ]
