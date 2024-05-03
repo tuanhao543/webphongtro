@@ -1,29 +1,16 @@
 from django.shortcuts import get_object_or_404, render,redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from .models import *
 import random
 from django.shortcuts import redirect
-import json
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.urls import reverse
-from django.db import transaction
-from django.forms import modelformset_factory
-from django.forms import formset_factory
 from django.shortcuts import render
 from django.views import View
-import speech_recognition as sr
-import pyttsx3
-from gtts import gTTS
-import os
-from datetime import date, datetime
-import playsound
-import webbrowser as wb
-import wikipedia
-import time
-import pywhatkit
+from .models import Phong
+import google.generativeai as genai
+from django.http import JsonResponse
+from django.views import View
 
 # Create your views here.
 
@@ -224,55 +211,136 @@ def huylichxemphong(request, ma_kh, malichxem):
     return redirect('xemlichxemphong', ma_kh=ma_kh)
 
 
-# from .models import Phong
-# from django.http import HttpResponseRedirect
-
-# import json
-
-# class AiAssistantView(View):
-#     def get(self, request):
-#         return render(request, 'app/chattrolyao.html')
-
-#     def post(self, request):
-#         NguoiDung = request.POST.get('q', '')
-#         response = self.process_input(NguoiDung)
-#         if isinstance(response, str):
-#             return JsonResponse({'response': response})
-#         else:
-#             return JsonResponse({'response': response['response'], 'redirect_url': response['redirect_url']})
-
-#     def process_input(self, NguoiDung):
-#         if 'chào' in NguoiDung:
-#             response = 'Chào bạn, tôi là trợ lý ảo của web, tôi có thể giúp gì cho bạn?'
-#             return response
-#         elif 'hôm nay' in NguoiDung:
-#             today = date.today()
-#             response = today.strftime("Hôm nay là %d/%m/%Y")
-#             return response
-#         elif 'mấy giờ' in NguoiDung:
-#             thoigian = datetime.now()
-#             response = thoigian.strftime("%H:%M:%S")
-#             return response
-#         elif 'tìm kiếm' in NguoiDung:
-#             search_keyword = NguoiDung.split('tìm kiếm', 1)[1].strip()
-#             redirect_url = f'/timkiem/?search_title={search_keyword}'
-#             return {'response': f'Tôi sẽ tìm kiếm "{search_keyword}"', 'redirect_url': redirect_url}
-#         else:
-#             response = "Tôi chưa được lập trình cho câu hỏi này"
-#             return response
-
-# def timkiem(request):
-#     if request.method == 'GET':
-#         search_title = request.GET.get('search_title', '')
-#         phong_list = Phong.objects.filter(tieude=search_title)
-#         context = {
-#             'phong_list': phong_list
-#         }
-#         return render(request, 'app/ketquatimkiem.html', context)
-#     return redirect('trangchudadangnhap')
-
-# def chat_view(request):
-#     return render(request, 'app/chattrolyao.html')
 
 
-# # ma_kh = request.GET.get('ma_kh')
+# ... (các import khác của bạn) ...
+
+# Cấu hình API key (thay thế bằng API key của bạn)
+genai.configure(api_key="AIzaSyBCjnxRI0H8l-z3JfTNtHbqMquBv6DaipA")
+
+def get_chat_history(request):
+    # Lấy lịch sử trò chuyện từ session
+    # (bạn cần xử lý trường hợp session chưa có dữ liệu)
+    return request.session.get('chat_history', [])
+
+def save_chat_history(request, history):
+    # Lưu lịch sử trò chuyện vào session
+    request.session['chat_history'] = history
+
+class AiAssistantView(View): 
+    def get(self, request):
+        return render(request, 'app/chattrolyao.html')
+
+    def post(self, request):
+        NguoiDung = request.POST.get('q', '')
+        ma_kh = request.POST.get('ma_kh')
+        response = self.process_input(NguoiDung, request)
+        if isinstance(response, str):
+            return JsonResponse({'response': response})
+        else:
+            return JsonResponse({'response': response['response'], 'redirect_url': response['redirect_url']})
+
+    def process_input(self, NguoiDung, request):
+        if 'chào' in NguoiDung:
+            response = 'Chào bạn, tôi là trợ lý ảo của web, tôi có thể giúp gì cho bạn?'
+            return response
+        elif NguoiDung == '':
+            response = 'Tôi không hiểu bạn đang nói gì, hãy lặp lại'
+            return response
+        elif 'tìm kiếm phòng ở' in NguoiDung:
+            search_keyword = NguoiDung.split('tìm kiếm phòng ở', 1)[1].strip()
+            ma_kh = request.POST.get('ma_kh')
+            redirect_url = f'/trolyaotimkiemquan/{ma_kh}/?search_quan={search_keyword}'
+            return {'response': f'Đây là kết quả tìm kiếm phòng ở "{search_keyword}" của bạn', 'redirect_url': redirect_url}
+        elif 'tìm kiếm phòng có giá' in NguoiDung:
+            search_keyword = NguoiDung.split('tìm kiếm phòng có giá', 1)[1].strip()
+            ma_kh = request.POST.get('ma_kh')
+            redirect_url = f'/trolyaotimkiemgia/{ma_kh}/?search_gia={search_keyword}'
+            return {'response': f'Đây là kết quả tìm kiếm phòng có giá "{search_keyword}" của bạn', 'redirect_url': redirect_url}
+        elif 'tìm kiếm ' in NguoiDung:
+            search_keyword = NguoiDung.split('tìm kiếm', 1)[1].strip()
+            ma_kh = request.POST.get('ma_kh')
+            redirect_url = f'/trolyaotimkiem/{ma_kh}/?search_title={search_keyword}'
+            return {'response': f'Đây là kết quả tìm kiếm phòng có tiêu đề là "{search_keyword}" của bạn', 'redirect_url': redirect_url}
+        else:
+            # Lấy lịch sử trò chuyện
+            history = get_chat_history(request)
+
+            # Gọi Gemini API
+            response = call_gemini_api(NguoiDung, history)
+
+            # Lưu lịch sử trò chuyện mới
+            history.append({"role": "user", "parts": [NguoiDung]})
+            history.append({"role": "model", "parts": [response]})
+            save_chat_history(request, history)
+
+            return response
+
+def call_gemini_api(query, history=[]):
+    # Thiết lập mô hình
+    generation_config = {
+        "temperature": 1,
+        "top_p": 0.95,
+        "top_k": 0,
+        "max_output_tokens": 8192,
+    }
+
+    safety_settings = [
+        {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+        },
+        # ... (các cài đặt an toàn khác) ...
+    ]
+
+    model = genai.GenerativeModel(
+        model_name="gemini-1.5-pro-latest",
+        generation_config=generation_config,
+        safety_settings=safety_settings
+    )
+
+    # Khởi tạo cuộc trò chuyện và gửi tin nhắn
+    convo = model.start_chat(history=history)
+    convo.send_message(query)
+    return convo.last.text
+
+def trolyaotimkiem(request, ma_kh):
+    if request.method == 'GET':
+        search_title = request.GET.get('search_title', '')
+        phong_list = Phong.objects.filter(tieude=search_title)
+        context = {
+            'phong_list': phong_list,
+             'ma_kh': ma_kh
+        }
+        return render(request, 'app/ketquatimkiem.html', context)
+    return redirect('trangchudadangnhap', ma_kh=ma_kh)
+
+
+def trolyaotimkiemquan(request, ma_kh):
+    if request.method == 'GET':
+        search_quan = request.GET.get('search_quan', '')
+        phong_list = Phong.objects.filter(diachi=search_quan)
+        context = {
+            'phong_list': phong_list,
+             'ma_kh': ma_kh
+        }
+        return render(request, 'app/ketquatimkiem.html', context)
+    return redirect('trangchudadangnhap', ma_kh=ma_kh)
+
+
+def trolyaotimkiemgia(request, ma_kh):
+    if request.method == 'GET':
+        search_gia = request.GET.get('search_gia', '')
+        phong_list = Phong.objects.filter(gia=search_gia)
+        context = {
+            'phong_list': phong_list,
+             'ma_kh': ma_kh
+        }
+        return render(request, 'app/ketquatimkiem.html', context)
+    return redirect('trangchudadangnhap', ma_kh=ma_kh)
+
+
+def chat_view(request, ma_kh):
+    return render(request, 'app/chattrolyao.html', {'ma_kh': ma_kh})
+
+
