@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết phòng</title>
+    <link href="{% static 'app/css/chitietphong.css' %}" rel="stylesheet"/>
+</head>
+<body>
+    <h1>Chi tiết phòng</h1>
+    <p><img src="{{phong.hinhanhURL}}" ></p>
+    <p>Tiêu đề: {{ phong.tieude }}</p>
+    <p>Mô tả: {{ phong.mota }}</p>
+    <p>Tính trạng nội thất: {{ phong.ttnt }}</p>
+    <p>Giá: {{ phong.gia }}</p>
+    <p>Diện tích: {{ phong.dientich }}</p>
+    <p>Địa chỉ: {{ phong.diachi }}</p>
+    <!-- Thêm các thông tin khác của phòng -->
+    <a class="btn btn-outline-success" href="{% url 'datlichxemphong' ma_kh=ma_kh ma_phong=phong.maphong %}">Đặt lịch xem</a>
+    
+</body>
+</html>
