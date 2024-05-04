@@ -83,7 +83,7 @@ def timkiem(request, ma_kh):
     if request.method == 'POST':
         search_title = request.POST.get('search_title', '')
         # Thực hiện tìm kiếm sản phẩm với tiêu đề trùng
-        phong_list = Phong.objects.filter(tieude=search_title)
+        phong_list = Phong.objects.filter(tieude__icontains=search_title)
         context = {
             'phong_list': phong_list
         }
@@ -307,7 +307,7 @@ def call_gemini_api(query, history=[]):
 def trolyaotimkiem(request, ma_kh):
     if request.method == 'GET':
         search_title = request.GET.get('search_title', '')
-        phong_list = Phong.objects.filter(tieude=search_title)
+        phong_list = Phong.objects.filter(tieude__icontains=search_title)
         context = {
             'phong_list': phong_list,
              'ma_kh': ma_kh
@@ -319,7 +319,7 @@ def trolyaotimkiem(request, ma_kh):
 def trolyaotimkiemquan(request, ma_kh):
     if request.method == 'GET':
         search_quan = request.GET.get('search_quan', '')
-        phong_list = Phong.objects.filter(diachi=search_quan)
+        phong_list = Phong.objects.filter(diachi__icontains=search_quan)
         context = {
             'phong_list': phong_list,
              'ma_kh': ma_kh
