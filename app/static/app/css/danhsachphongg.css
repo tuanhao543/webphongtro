@@ -1,0 +1,130 @@
+/* CSS cho các hình ảnh */
+
+.thumbnail {
+    width: 100%;
+    /* Chiều rộng tối đa */
+    height: 200px;
+    /* Chiều cao cố định */
+    object-fit: cover;
+    /* Đảm bảo hình ảnh phủ đầy không gian mà không bị méo */
+    border-radius: 5px;
+    /* Bo tròn góc */
+    margin-bottom: 15px;
+    /* Khoảng cách giữa hình ảnh và nội dung bên dưới */
+}
+
+
+/* CSS cho nút 'Xem lịch xem phòng' */
+
+.btn-outline-success {
+    padding: 2px 10px;
+    /* Giảm padding */
+    font-size: 12px;
+    /* Giảm kích thước font */
+    border-radius: 3px;
+    /* Làm cho góc tròn nhỏ hơn */
+    margin-top: 5px;
+    /* Giảm khoảng cách từ nút đến phần tử trên */
+    margin-bottom: 10px;
+    /* Giảm khoảng cách từ nút đến phần tử dưới */
+    width: initial;
+    /* Đặt chiều rộng ban đầu, không căn giữa */
+    display: inline-block;
+    /* Hiển thị dạng inline-block để nút không chiếm toàn bộ chiều rộng */
+}
+
+
+/* CSS cho container chứa các phần tử */
+
+.col-lg-3 {
+    width: 24%;
+    /* Điều chỉnh chiều rộng để phù hợp với 4 phần tử trên một hàng */
+    margin: 3%;
+    /* Tăng khoảng cách giữa các phần tử */
+    float: left;
+    /* Sắp xếp các phần tử theo hàng ngang */
+    box-sizing: border-box;
+    /* Tính toán kích thước phần tử bao gồm padding và border */
+}
+
+.box-element {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-right: 35%;
+    /* Khoảng cách giữa các phần tử */
+}
+
+.box-element h6 {
+    font-size: 16px;
+    /* Điều chỉnh kích thước font chữ */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.box-element .btn {
+    padding: 5px 10px;
+    /* Điều chỉnh padding cho nút */
+    font-size: 14px;
+    /* Điều chỉnh kích thước font chữ cho nút */
+    margin-bottom: 40px;
+    /* Khoảng cách giữa nút và nội dung khác */
+}
+
+.box-element h4 {
+    font-size: 18px;
+    /* Điều chỉnh kích thước font chữ cho giá */
+    color: #b12704;
+    float: right;
+    /* Căn phải giá tiền */
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-outline-success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+/* Điều chỉnh lại cho responsive */
+
+@media (max-width: 768px) {
+    .col-lg-3 {
+        width: 49%;
+        /* Điều chỉnh chiều rộng cho màn hình nhỏ hơn */
+        margin: 0.5%;
+        /* Giảm khoảng cách giữa các phần tử cho màn hình nhỏ hơn */
+    }
+}
+@media (max-width: 480px) {
+    .col-lg-3 {
+        width: 100%;
+        /* Chiếm toàn bộ chiều rộng màn hình cho màn hình rất nhỏ */
+        margin: 0.5%;
+        /* Giảm khoảng cách giữa các phần tử cho màn hình rất nhỏ */
+    }
+}
+

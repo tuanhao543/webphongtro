@@ -1,0 +1,116 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.btn-outline-success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    /* Căn giữa tiêu đề */
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #b12704;
+    /* Màu sắc cho tiêu đề phòng */
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    /* Kích thước font chữ cho mô tả */
+    color: #666;
+    margin-bottom: 10px;
+}
+
+img {
+    width: 30%;
+    height: 30%;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    display: block;
+    /* Đặt hình ảnh thành block để căn giữa */
+    margin-left: auto;
+    /* Căn giữa hình ảnh */
+    margin-right: auto;
+    /* Căn giữa hình ảnh */
+}
+
+.btn-outline-success {
+    padding: 5px 10px;
+    /* Padding nhỏ hơn */
+    font-size: 14px;
+    /* Kích thước font nhỏ hơn */
+    border-radius: 5px;
+    /* Bo tròn góc */
+    margin-top: 10px;
+    /* Khoảng cách từ nút đến phần tử trên */
+    margin-bottom: 20px;
+    /* Khoảng cách từ nút đến phần tử dưới */
+    width: auto;
+    /* Chiều rộng tự động theo nội dung */
+    display: block;
+    /* Hiển thị dạng block để căn giữa */
+    margin-left: auto;
+    /* Căn giữa nút */
+    margin-right: auto;
+    /* Căn giữa nút */
+}

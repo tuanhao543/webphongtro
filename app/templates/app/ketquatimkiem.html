@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách phòng</title>
+    <link href="{% static 'app/css/danhsachphongg.css' %}" rel="stylesheet"/>
+</head>
+<body>
+{% for phong in phong_list %}
+  <div class = "col-lg-3">
+    <img class = "thumbnail" src="{{phong.hinhanhURL}}" >
+    <div clas="box-element product">
+      <h6><strong>{{phong.tieude}}</strong></h6>
+      <hr>
+     
+      <a class ="btn btn-outline-success" href="#">Xem chi tiết</a>
+      <h4 style= "display: inline-block; float: right"><strong>${{phong.gia | floatformat:2}}</strong></h4>
+    </div>
+  </div>
+ {% endfor %}
+ <a class="btn btn-outline-success" href="#">Xem lịch xem phòng</a>
+</body>
+</html>

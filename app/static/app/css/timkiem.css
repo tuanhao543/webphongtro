@@ -1,0 +1,44 @@
+/* Chọn vùng chứa các mục cần sắp xếp */
+.input-wrapper {
+    display: flex; /* Sử dụng flexbox để sắp xếp */
+    justify-content: space-between; /* Căn đều khoảng cách giữa các mục */
+    align-items: center; /* Căn chỉnh theo chiều dọc */
+  }
+  
+  /* Chọn từng mục (form, dropdown) */
+  .input-wrapper form,
+  .input-wrapper .nav-item {
+    margin: 0; /* Loại bỏ margin mặc định */
+    flex: 1; /* Chia đều không gian cho các mục */
+  }
+  
+  /* Điều chỉnh khoảng cách giữa các mục (tùy chọn) */
+  .input-wrapper form {
+    margin-right: 10px; /* Thêm margin phải cho form */
+  }
+  
+  /* Thiết lập độ rộng cho dropdown (tùy chọn) */
+  .input-wrapper .dropdown-menu {
+    width: 200px; /* Ví dụ: đặt độ rộng 200px */
+  }
+
+  /* Chọn vùng chứa khung nhu cầu */
+.hero-form-wrapper {
+    background-color: white; /* Thiết lập nền trắng */
+    padding: 20px; /* Thêm padding để tạo khoảng cách với nội dung bên trong */
+    border-radius: 8px; /* Bo tròn góc (tùy chọn) */
+  }
+
+  .nav-item.dropdown .dropdown-menu {
+    bottom: 100%; /* Ensure menu opens downwards */
+    top: auto;    /* Reset any conflicting top positioning */
+  }
+
+  .move-up {
+    transform: translateY(-15px); /* Adjust the value as needed */
+  }
+  .nav-item.dropdown .dropdown-menu {
+    top: calc(100% - 15px); /* Adjust the value as needed */
+  }
+
+
